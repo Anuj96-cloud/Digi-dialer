@@ -1,0 +1,39 @@
+*,*:after,*:before{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: arial;
+	font-size: 16px;
+	margin: 0;
+	background: #fff;
+	color: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+.container{
+	max-width: 1100px;
+	width: 100%;
+}
+#myTable thead tr th{
+	background-color: #000;
+	color: #fff;
+}
+#myTable_filter{
+	margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+      width: 100%; /* Ensure dropdown fills the width on smaller screens */
+    }
+    
+    .btn-rounded {
+      width: 100%; /* Full-width button for mobile */
+    }
+  }
+  

@@ -1,0 +1,55 @@
+<div id="edit_asset" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Asset</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form   (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label" for="editAssetsName">User Id</label>
+                  <input id="editAssetsName" class="form-control" type="text" formControlName="editAssetsName" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label" for="editAssetId">Asset Id</label>
+                  <input id="editAssetId" class="form-control" type="text" formControlName="editAssetId" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label" for="edituserGroup">User Group</label>
+                  <input id="edituserGroup" class="form-control" type="text" formControlName="edituserGroup" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label" for="editWarranty">Warranty Status</label>
+                  <input id="editWarranty" class="form-control" type="text" formControlName="editWarranty" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label" for="editAssetUser">Email</label>
+                  <input id="editAssetUser" class="form-control" type="email" formControlName="editAssetUser" required>
+                </div>
+              </div>
+            </div>
+            <div class="submit-section">
+              <button class="btn btn-primary submit-btn" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

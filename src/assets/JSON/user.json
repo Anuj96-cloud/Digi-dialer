@@ -1,0 +1,20 @@
+{
+    "data" : [
+        {
+            "userId": "#AST-0001",
+            "userName": "yarle",
+            "groupName": "AGENTS",
+            "email": "yarle180@gmail.com",
+            "status": "active",
+            "id": 1
+        },
+        {
+           "userId": "#AST-0002",
+            "userName": "Steven Hanson",
+            "groupName": "AGENTS",
+            "email": "Steven@gmail.com",
+            "status": "Pending",
+            "id": 2
+          }
+    ]
+}

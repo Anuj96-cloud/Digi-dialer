@@ -1,0 +1,336 @@
+<div class="content-wrapper">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col m-4">
+          <h3 class="page-title">List Management</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.adminDashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Users</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <section class="contentSection">
+      <div class="container-fluid">
+        <div class="cards card-info">
+          <form [formGroup]="listForm" (ngSubmit)="onSubmitList()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="cards card-warning">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-tabs nav-justified">
+                      <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: activeTab === 'list'}" (click)="setActiveTab('list')">LIST</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: activeTab === 'dnc'}" (click)="setActiveTab('dnc')">DNC</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: activeTab === 'lead'}" (click)="setActiveTab('lead')">Add New Lead</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: activeTab === 'upload'}" (click)="setActiveTab('upload')">Upload Leads</a>
+                      </li>
+                    </ul>
+                  </div>
+  
+                  <div class="card-body">
+                    <div class="tab-content">
+  
+                     <!-- List Tab Content -->
+<div class="tab-pane" [ngClass]="{'active': activeTab === 'list'}" *ngIf="activeTab === 'list'">
+    <section class="contentSec">
+      <div class="container-fluid">
+        <div class="add-btn-container mb-3">
+          <button type="button" class="btn btn-primary" (click)="onAddList()" data-bs-toggle="modal" data-bs-target="#addListModal">
+            <i class="fas fa-plus"></i> Add List
+          </button>
+        </div>
+  
+        <table class="table table-striped table-bordered table-sm row-border hover">
+          <thead>
+            <tr>
+              <th>List ID</th>
+              <th>List Name</th>
+              <th>Reset Time</th>
+              <th>Lead Count</th>
+              <th>Call Time</th>
+              <th>Last Call Time</th>
+              <th>Campaign</th>
+              <th>Status</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of lists; let i = index">
+              <td>{{ list.id }}</td>
+              <td>{{ list.name }}</td>
+              <td>{{ list.resetTime }}</td>
+              <td>{{ list.leadCount }}</td>
+              <td>{{ list.callTime }}</td>
+              <td>{{ list.lastCallTime }}</td>
+              <td>{{ list.campaign }}</td>
+              <td>{{ list.status }}</td>
+              <td>
+                <button class="btn btn-primary btn-xs" (click)="onEdit(list)" data-bs-toggle="modal" data-bs-target="#editListModal">
+                  <i class="far fa-edit"></i>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger btn-xs" (click)="onDelete(list.id)">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+     <!-- Add List Modal -->
+  <div class="modal fade" id="addListModal" tabindex="-1" aria-labelledby="addListModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editListModalLabel">Add List</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="listForm" (ngSubmit)="onSubmitList()">
+            <div class="mb-3">
+              <label for="name" class="form-label">List Name</label>
+              <input type="text" id="name" class="form-control" formControlName="name">
+            </div>
+            <div class="mb-3">
+              <label for="resetTime" class="form-label">Reset Time</label>
+              <input type="text" id="resetTime" class="form-control" formControlName="resetTime">
+            </div>
+            <div class="mb-3">
+              <label for="leadCount" class="form-label">Lead Count</label>
+              <input type="number" id="leadCount" class="form-control" formControlName="leadCount">
+            </div>
+            <div class="mb-3">
+              <label for="callTime" class="form-label">Call Time</label>
+              <input type="text" id="callTime" class="form-control" formControlName="callTime">
+            </div>
+            <div class="mb-3">
+              <label for="lastCallTime" class="form-label">Last Call Time</label>
+              <input type="text" id="lastCallTime" class="form-control" formControlName="lastCallTime">
+            </div>
+            <div class="mb-3">
+              <label for="campaign" class="form-label">Campaign</label>
+              <input type="text" id="campaign" class="form-control" formControlName="campaign">
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <input type="text" id="status" class="form-control" formControlName="status">
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit List Modal -->
+  <div class="modal fade" id="editListModal" tabindex="-1" aria-labelledby="editListModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editListModalLabel">Edit List</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="listForm" (ngSubmit)="onSubmitList()">
+            <div class="mb-3">
+              <label for="name" class="form-label">List Name</label>
+              <input type="text" id="name" class="form-control" formControlName="name">
+            </div>
+            <div class="mb-3">
+              <label for="resetTime" class="form-label">Reset Time</label>
+              <input type="text" id="resetTime" class="form-control" formControlName="resetTime">
+            </div>
+            <div class="mb-3">
+              <label for="leadCount" class="form-label">Lead Count</label>
+              <input type="number" id="leadCount" class="form-control" formControlName="leadCount">
+            </div>
+            <div class="mb-3">
+              <label for="callTime" class="form-label">Call Time</label>
+              <input type="text" id="callTime" class="form-control" formControlName="callTime">
+            </div>
+            <div class="mb-3">
+              <label for="lastCallTime" class="form-label">Last Call Time</label>
+              <input type="text" id="lastCallTime" class="form-control" formControlName="lastCallTime">
+            </div>
+            <div class="mb-3">
+              <label for="campaign" class="form-label">Campaign</label>
+              <input type="text" id="campaign" class="form-control" formControlName="campaign">
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <input type="text" id="status" class="form-control" formControlName="status">
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+                      <!-- DNC Tab Content -->
+                      <div class="tab-pane" [ngClass]="{'active': activeTab === 'dnc'}" *ngIf="activeTab === 'dnc'">
+                        <section class="contentSec">
+                          <div class="container-fluid">
+                            <table class="table table-striped table-bordered table-sm row-border hover">
+                              <thead>
+                                <tr>
+                                  <th>DNC Number</th>
+                                  <th>Reason</th>
+                                  <th>Delete</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let dnc of dncNumbers">
+                                  <td>{{ dnc.dncNumber }}</td>
+                                  <td>{{ dnc.reason }}</td>
+                                  <td>
+                                    <button class="btn btn-danger btn-xs" (click)="onDeleteDNC(dnc.dncNumber)">
+                                      <i class="far fa-trash-alt"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+  
+                            <div class="add-btn-container mb-3">
+                              <button type="button" class="btn btn-primary" (click)="setActiveTab('addDNC')">
+                                <i class="fas fa-plus"></i> Add DNC
+                              </button>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+  
+                      <!-- Lead Tab Content -->
+                      <div class="tab-pane" [ngClass]="{'active': activeTab === 'lead'}" *ngIf="activeTab === 'lead'">
+                        <section class="contentSec">
+                          <div class="container-fluid">
+                            <form [formGroup]="leadForm"> 
+                              <div class="Section">
+                               <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label for="listId">List ID</label>
+                                    <select id="listId" formControlName="listId" class="form-select">
+                                      <option value="">Select List</option>
+                                      <option *ngFor="let list of lists" [value]="list.id">{{ list.name }}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label for="campaign">Campaign</label>
+                                    <input type="text" formControlName="campaign" class="form-control">
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" formControlName="fullName" class="form-control" required>
+                                  </div>
+                               </div>
+                               <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label for="phoneNumber">Phone Number</label>
+                                    <input type="text" formControlName="phoneNumber" class="form-control" required>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <label for="address">Address</label>
+                                      <input type="text" formControlName="address" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <label for="country">Country</label>
+                                      <select formControlName="country" class="form-control" required>
+                                        <option value="" disabled>Select a country</option>
+                                        <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                                      </select>
+                                    </div>
+                               </div>
+                                 <div class="row mb-2">
+                                    <div class="col-md-4">
+                                        <label for="pincode">Pin Code</label>
+                                        <input type="text" formControlName="pincode" class="form-control" required>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label for="email">Email</label>
+                                        <input type="email" formControlName="email" class="form-control" required>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <label for="dialcode">Dial Code</label>
+                                        <input type="text" formControlName="dialcode" class="form-control" required>
+                                      </div>
+                                 </div>
+                                  
+                              <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Add Lead</button>
+                                  </div>
+                              </div>
+                              </div>
+                            </form>
+                          </div>
+                        </section>
+                      </div>
+  
+                      <!-- Upload Leads Tab Content -->
+                      <div class="tab-pane" [ngClass]="{'active': activeTab === 'upload'}" *ngIf="activeTab === 'upload'">
+                        <section class="contentSec">
+                          <div class="container-fluid">
+                            <form [formGroup]="uploadForm" (ngSubmit)="onSubmitUpload()">
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label for="uploadListId">List ID</label>
+                                  <select id="uploadListId" formControlName="listId" class="form-select">
+                                    <option value="">Select List</option>
+                                    <option *ngFor="let list of lists" [value]="list.id">{{ list.name }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="campaign">Campaign</label>
+                                  <input type="text" formControlName="campaign" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="duplicateCheck">Duplicate Check</label>
+                                  <select id="duplicateCheck" formControlName="duplicateCheck" class="form-select">
+                                    <option value="">Select Option</option>
+                                    <option value="no">No Duplicate Check</option>
+                                    <option value="checkPhonesInList">Check Phones in List</option>
+                                    <option value="checkPhonesInCampaign">Check Phones in Campaign</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-8">
+                                  <label for="csvFile">CSV File</label>
+                                  <input type="file" (change)="onFileSelected($event)" class="form-control" required>
+                                </div>
+                                <div class="col-md-4">
+                                  <button type="submit" class="btn btn-success">Upload Leads</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </section>
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+  

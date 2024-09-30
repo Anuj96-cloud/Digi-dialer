@@ -1,0 +1,53 @@
+
+
+<div class="d-flex justify-content-between align-items-center m-2">
+    <div>
+      <h2 mat-dialog-title class="modal-header m-2">{{ data.title }}</h2>
+    </div>
+    <button type="button" class="btn-close me-3" (click)="close()"></button>
+  </div>
+    <div class="p-4"> 
+        <div mat-dialog-content>
+          <form [formGroup]="usersForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label">User Id</label>
+                  <input class="form-control" type="text" formControlName="userId" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label">User Name</label>
+                  <input class="form-control" type="text" formControlName="userName" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label">User Group</label>
+                  <input  class="form-control" type="text" formControlName="groupName" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label">Status</label>
+                  <input class="form-control" type="text" formControlName="status" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block mb-3">
+                  <label class="col-form-label">Email</label>
+                  <input   class="form-control" type="email" formControlName="email" required>
+                </div>
+              </div>
+            </div>
+            <div class="submit-section">
+              <button class="btn btn-primary submit-btn" type="submit">{{data.buttonText}}</button>
+            </div>
+          </form>
+        </div>
+    </div>

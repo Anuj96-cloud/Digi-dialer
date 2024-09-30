@@ -1,0 +1,27 @@
+.tabs {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .tab-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .tab-list li {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  
+  .tab-list li.active {
+    border-bottom: 1px solid #fff; /* Adjust for active tab */
+    background: #f0f0f0; /* Background for active tab */
+  }
+  
+  .tab-content {
+    padding: 15px;
+    border-top: 1px solid #ccc;
+  }
+  
